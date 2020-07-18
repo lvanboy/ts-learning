@@ -11,10 +11,14 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "noImplicitAny":true,
     "types": [
       "webpack-env"
     ],
     "paths": {
+      "countup":[
+        "/src/types/countup/index.d.ts"
+      ],
       "@/*": [
         "src/*"
       ]

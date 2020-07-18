@@ -1,12 +1,23 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/login">登录</router-link>|
+      <router-link to="/about">About</router-link> |
+      <router-link to="/" @click.native="logout">注销</router-link>
     </div>
     <router-view />
   </div>
 </template>
+
+<script lang="ts">
+import { Vue } from "vue-property-decorator";
+import Cookie from "js-cookie";
+export default class App extends Vue {
+  logout() {
+    Cookie.remove("token");
+  }
+}
+</script>
 
 <style lang="less">
 #app {

@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <count-to
+      :start="100"
+      :end="9999"
+      ref="count"
+      @on-click="handleClick"
+    ></count-to>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
-export default {
-  name: "Home",
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+import CountTo from "@/components/countTo";
+@Component({
   components: {
-    HelloWorld
+    CountTo
   }
-};
+})
+export default class Home extends Vue {
+  timer = 0;
+  mounted() {
+    this.timer = setInterval(() => {
+      (this.$refs.count as CountTo).update(Math.random() * 10000);
+    }, 2000);
+  }
+  destroyed() {
+    clearInterval(this.timer);
+  }
+  handleClick(e: Event) {
+    console.log("Event", e);
+  }
+}
 </script>
